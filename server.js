@@ -1,7 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
- 
+var webpack = require('webpack');
+var config = require('./webpack.config');
+
 var app = express();
+var compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
 
 app.get('/ping', function (req, res) {
   res.send('pong')
