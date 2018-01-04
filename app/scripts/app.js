@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-class MyComponent extends React.Component {
-  render() {
-    return <div>Hello World</div>;
-  }
-}
+import { BrowserRouter, Route, Link } from 'react-router-dom'
+import MainPage from './pages/MainPage'
 
 ReactDOM.render(
-  <MyComponent />,
+  <BrowserRouter>
+    <div>
+      <Route path='/' component={MainPage} />
+    </div>
+  </BrowserRouter>,
   document.getElementById('app-container')
 );
