@@ -3,7 +3,7 @@ var webpack = require('webpack');
  
 module.exports = {
   entry: [
-    './app/app'
+    './app/scripts/app'
   ],
   devtool: 'eval-source-map',
   output: {
@@ -15,7 +15,7 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel-loader'],
-      include: path.join(__dirname, 'app')
+      include: path.join(__dirname, 'app/scripts')
     }]
   }
 };
