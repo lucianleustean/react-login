@@ -2,20 +2,29 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Redirect } from 'react-router-dom'
 import { authenticate } from '../util/AuthService'
+import ErrorComponent from './error'
 
 class Login extends React.Component {
   state = {
-    redirectToReferrer: false
+    redirectToReferrer: false,
+    errorMessage: ''
   }
 
-  login = () => {
-    authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
+  handleSubmit(event) {
+    event.preventDefault();
+    var username = document.getElementById("inputUsername").value
+    var password = document.getElementById("inputPassword").value
+    if (username && password) {
+      authenticate(username, password)
+    } else {
+      this.setState({ errorMessage: "Username or password empty" })
+    }
   }
 
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
+    var fromError = "You must log in to view the page at " + from.pathname
+
     const { redirectToReferrer } = this.state
 
     if (redirectToReferrer) {
@@ -26,9 +35,16 @@ class Login extends React.Component {
 
     return (
       <div>
-        <h2>This is a login Page</h2>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
+        <form className="form-signin" onSubmit={this.handleSubmit}>
+          <h2 className="form-signin-heading">Please sign in</h2>
+          <ErrorComponent error={fromError} />
+          <ErrorComponent error={this.state.errorMessage} />
+          <label htmlFor="inputUsername" className="sr-only">Username</label>
+          <input type="string" id="inputUsername" className="form-control" placeholder="Username" required autoFocus />
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <input type="password" id="inputPassword" className="form-control" placeholder="Password" required />
+          <button className="btn btn-lg btn-primary btn-block" onClick={this.handleSubmit.bind(this)}>Sign in</button>
+        </form>
       </div>
     )
   }

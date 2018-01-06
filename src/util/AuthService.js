@@ -4,5 +4,5 @@ export function authenticate(cb) {
 }
 
 export function isAuthenticated() {
-  return true
+  return false
 }
