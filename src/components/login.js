@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Redirect } from 'react-router-dom'
-import { authenticate } from '../util/AuthService'
+import { AuthenticateUser } from '../util/AuthService'
 import ErrorComponent from './error'
 
 class Login extends React.Component {
@@ -15,7 +15,7 @@ class Login extends React.Component {
     var username = document.getElementById("inputUsername").value
     var password = document.getElementById("inputPassword").value
     if (username && password) {
-      authenticate(username, password)
+      AuthenticateUser(username, password)
     } else {
       this.setState({ errorMessage: "Username or password empty" })
     }

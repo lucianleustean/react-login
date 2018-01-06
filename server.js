@@ -1,4 +1,5 @@
 var express = require('express');
+var proxy = require('express-http-proxy');
 var bodyParser = require('body-parser');
 var webpack = require('webpack');
 var config = require('./webpack.config');
@@ -11,6 +12,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
 }));
+
+app.use('/api', proxy('http://localhost:4000'));
 
 app.get('/ping', function (req, res) {
   res.send('pong')
