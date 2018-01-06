@@ -17,11 +17,11 @@ app.get('/ping', function (req, res) {
 })
 
 app.get('/css/bootstrap.min.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'app/styles/bootstrap.min.css'));
+  res.sendFile(path.join(__dirname, 'public/css/bootstrap.min.css'));
 });
  
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'app/index.html'));
+  res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
 app.listen(3000, 'localhost', function (err) {
