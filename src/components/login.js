@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Redirect } from 'react-router-dom'
-import { AuthenticateUser } from '../util/AuthService'
+import { authenticateUser, isAuthenticated } from '../util/AuthService'
 import ErrorComponent from './error'
 
 class Login extends React.Component {
@@ -12,10 +12,18 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     var username = document.getElementById("inputUsername").value
     var password = document.getElementById("inputPassword").value
+
     if (username && password) {
-      AuthenticateUser(username, password)
+      authenticateUser(username, password)
+        .then(res => {
+          this.setState({ redirectToReferrer: true })
+        })
+        .catch(( err ) => {
+          this.setState({ errorMessage: err.message })
+        })
     } else {
       this.setState({ errorMessage: "Username or password empty" })
     }
@@ -29,7 +37,7 @@ class Login extends React.Component {
 
     if (redirectToReferrer) {
       return (
-        <Redirect to={from}/>
+        <Redirect to={from.pathname}/>
       )
     }
 
