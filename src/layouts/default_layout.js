@@ -1,11 +1,13 @@
 import React from 'react'
 import Header from '../components/header'
 
-const DefaultLayout = ({ children }) => (                       
+const DefaultLayout = ({ children }) => (
   <div>
     <Header />
-    {children}                                          
-  </div>           
+    <div className="container">
+      {children}
+    </div>
+  </div>
 )
 
 export default DefaultLayout
