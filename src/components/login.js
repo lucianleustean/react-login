@@ -6,7 +6,7 @@ import ErrorComponent from './error'
 
 class Login extends React.Component {
   state = {
-    redirectToReferrer: false,
+    redirectToReferrer: isAuthenticated(),
     errorMessage: ''
   }
 
@@ -42,7 +42,7 @@ class Login extends React.Component {
     }
 
     return (
-      <div>
+      <div className="custom-container">
         <form className="form-signin" onSubmit={this.handleSubmit}>
           <h2 className="form-signin-heading">Please sign in</h2>
           <ErrorComponent error={fromError} />

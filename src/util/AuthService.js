@@ -1,3 +1,5 @@
+import React from 'react'
+import { Redirect } from 'react-router-dom'
 import fetch from 'isomorphic-fetch';
 
 export function authenticateUser(username, password) {
@@ -30,4 +32,13 @@ export function authenticateUser(username, password) {
 
 export function isAuthenticated() {
   return sessionStorage.getItem("session") ? true : false
+}
+
+export function getUsername() {
+  const session = sessionStorage.getItem("session");
+  return session ? JSON.parse(session).username : ''
+}
+
+export function logout() {
+  return sessionStorage.clear();
 }

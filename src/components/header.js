@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AuthenticationMenu from './authentication_menu'
 
 export default class Header extends React.Component {
   render() {
@@ -20,6 +21,7 @@ export default class Header extends React.Component {
             </li>
           </ul>
         </div>
+        <AuthenticationMenu />
       </nav>
     );
   }

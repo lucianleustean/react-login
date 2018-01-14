@@ -26,7 +26,7 @@ app.get('/css/bootstrap.min.css', function (req, res) {
 app.get('/css/app.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'public/css/app.css'));
 });
- 
+
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
